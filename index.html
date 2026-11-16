@@ -4,547 +4,347 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alejandro Linares García</title>
-<meta name="description" content="Alejandro Linares García · Operaciones financieras: cobros, conciliación y tesorería, con automatización en Python e IA. Barcelona.">
+<meta name="description" content="Alejandro Linares García · Finanzas operativas y automatización con IA. Cobros, conciliación y tesorería. Barcelona.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* Idea: un informe bien compuesto. Una columna de lectura, notas al margen, filetes finos, cifras como protagonistas. Sin tarjetas ni etiquetas. */
+/* Idea: un informe financiero con alma. Bloques de verde profundo que marcan el ritmo, cifras en serifa grande, historias cortas. Un solo tema, por decisión. */
 :root{
-  --paper:#FAFAF7;
-  --ink:#151816;
-  --soft:#5E6661;
-  --hair:#DCDFDA;
-  --accent:#1E5A44;
-  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --paper:#F8F7F2;
+  --white:#FFFFFF;
+  --ink:#141816;
+  --soft:#58615C;
+  --hair:#DCDFD8;
+  --deep:#123327;
+  --deep2:#1A4535;
+  --mint:#A8D5BD;
+  --accent:#1D5A43;
+  --serif:"Newsreader",Georgia,serif;
   --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   color-scheme:light;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){--paper:#111413;--ink:#E9ECE9;--soft:#9AA39E;--hair:#2A302D;--accent:#7CC7A6;color-scheme:dark}
-}
-:root[data-theme="dark"]{--paper:#111413;--ink:#E9ECE9;--soft:#9AA39E;--hair:#2A302D;--accent:#7CC7A6;color-scheme:dark}
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-a{color:inherit;text-decoration-color:var(--hair);text-underline-offset:3px}
-a:hover{text-decoration-color:var(--ink)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 img{max-width:100%;display:block}
 p{margin:0}
-h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-0.01em}
-.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-0.015em}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.k{font:600 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.sec{padding:104px 0}
+.sec-h{max-width:720px;margin-bottom:52px}
+.sec-h h2{font-size:clamp(34px,4.4vw,54px);line-height:1.04;margin-top:14px}
+.sec-h p{font-size:19px;color:var(--soft);margin-top:16px;max-width:36em}
 
-/* Retícula: margen de notas + columna de lectura */
-.page{max-width:1080px;margin:0 auto;padding:0 28px}
-.row{display:grid;grid-template-columns:200px minmax(0,1fr);gap:0 56px}
-.side{font:500 12px/1.5 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);padding-top:6px}
-.side .n{display:block;font-family:var(--serif);font-size:15px;letter-spacing:0;text-transform:none;font-style:italic;margin-bottom:2px;color:var(--ink)}
-.main{max-width:680px}
-
-/* Cabecera mínima */
-.top{display:flex;justify-content:space-between;align-items:center;padding:26px 0;border-bottom:1px solid var(--hair);font-size:14px}
-.top .who{font-family:var(--serif);font-size:18px}
-.lang{display:flex;gap:4px;align-items:center}
-.lang button{font:500 12.5px/1 var(--sans);letter-spacing:.06em;background:none;border:0;padding:6px 6px;color:var(--soft);cursor:pointer;border-bottom:1px solid transparent}
+/* Barra superior */
+.bar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;height:64px}
+.who{font-family:var(--serif);font-size:19px;text-decoration:none;white-space:nowrap}
+.who span{color:var(--accent)}
+.bar nav{display:flex;gap:26px;font-size:14.5px}
+.bar nav a{text-decoration:none;color:var(--soft)}
+.bar nav a:hover{color:var(--ink)}
+.right{display:flex;align-items:center;gap:28px}
+.lang{display:flex;gap:2px}
+.lang button{font:500 12.5px/1 var(--sans);letter-spacing:.06em;background:none;border:0;padding:8px 7px;color:var(--soft);cursor:pointer;border-bottom:1.5px solid transparent}
 .lang button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
-.lang span{color:var(--hair)}
 
 /* Portada */
-.cover{padding:88px 0 72px}
-.cover .row{align-items:end}
-.kicker{font:500 12.5px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:28px}
-.cover h1{font-size:clamp(46px,6.6vw,88px);line-height:.98;letter-spacing:-0.025em}
-.cover h1 em{font-style:italic;color:var(--accent)}
-.cover .lead{font-family:var(--serif);font-size:clamp(20px,2vw,23px);line-height:1.45;color:var(--ink);margin-top:34px;max-width:32em}
-.cover .lead strong{font-weight:500}
-.portrait{margin:0}
-.portrait{padding:10px;border:1px solid var(--hair);background:color-mix(in srgb,var(--paper) 70%,#fff)}
-.portrait img{width:100%;height:auto;aspect-ratio:5/6;object-fit:cover;object-position:50% 30%}
-.portrait figcaption{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--soft);margin-top:10px;line-height:1.3}
-.portrait figcaption b{font-family:var(--serif);font-weight:400;font-size:15px;color:var(--ink)}
-.cover-grid{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:64px;align-items:end}
-.links{display:flex;gap:26px;margin-top:38px;font-size:15px;flex-wrap:wrap}
-.links a{font-weight:500}
+.hero{background:var(--deep);color:#F3F1E9;position:relative;overflow:hidden;padding:92px 0 150px}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 500px at 85% -10%,rgba(168,213,189,.16),transparent 60%);pointer-events:none}
+.hero::after{content:"";position:absolute;right:-180px;top:-160px;width:620px;height:620px;border-radius:50%;border:1px solid rgba(243,241,233,.08);box-shadow:0 0 0 80px rgba(243,241,233,.025),0 0 0 180px rgba(243,241,233,.018);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:300px minmax(0,1fr);gap:72px;align-items:center}
+.polaroid{margin:0;background:#FBFAF5;padding:12px 12px 14px;transform:rotate(-2deg);box-shadow:0 40px 70px -30px rgba(0,0,0,.6)}
+.polaroid img{width:100%;height:auto;aspect-ratio:5/6;object-fit:cover;object-position:50% 30%}
+.polaroid figcaption{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;color:#5E6661;font-size:12.5px}
+.polaroid figcaption b{font-family:var(--serif);font-weight:400;font-size:17px;color:#151816}
+.hero .k{color:var(--mint)}
+.hero h1{font-size:clamp(46px,6.4vw,86px);line-height:.98;letter-spacing:-0.03em;margin-top:22px;color:#F8F6EF}
+.hero h1 em{font-style:italic;color:var(--mint)}
+.hero .lead{font-family:var(--serif);font-size:clamp(20px,2vw,23px);line-height:1.45;color:#DCDCD2;margin-top:28px;max-width:31em}
+.btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font:600 15px/1 var(--sans);text-decoration:none;border:1.5px solid transparent;transition:transform .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.mint{background:var(--mint);color:var(--deep)}
+.btn.ghost{border-color:rgba(243,241,233,.4);color:#F3F1E9}
+.btn svg{width:16px;height:16px}
 
-/* Cifras clave */
-.keys{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
-.key{padding:22px 24px 24px 0}
-.key + .key{padding-left:24px;border-left:1px solid var(--hair)}
-.key b{display:block;font:400 clamp(28px,4vw,48px)/1 var(--serif);letter-spacing:-0.02em}
-.key span{display:block;margin-top:10px;font-size:14px;color:var(--soft)}
+/* Cifras flotando sobre la portada */
+.stats{position:relative;z-index:2;margin-top:-86px}
+.stats-in{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--white);box-shadow:0 30px 60px -36px rgba(18,51,39,.45);border:1px solid var(--hair)}
+.stat{padding:30px 32px 32px}
+.stat + .stat{border-left:1px solid var(--hair)}
+.stat b{display:block;font:400 clamp(36px,4.2vw,54px)/1 var(--serif);letter-spacing:-0.03em;color:var(--deep)}
+.stat span{display:block;margin-top:12px;font-size:14.5px;color:var(--soft)}
 
-section{padding:84px 0 0}
-section h2{font-size:clamp(30px,3.4vw,42px);line-height:1.1;margin-bottom:22px}
-.intro{color:var(--soft);font-size:17.5px;max-width:36em}
-.intro + *{margin-top:36px}
+/* Cómo trabajo */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;position:relative}
+.step{padding:0 34px 0 0;position:relative}
+.step + .step{padding-left:34px;border-left:1px solid var(--hair)}
+.step .n{font:400 72px/1 var(--serif);color:var(--accent);opacity:.9;letter-spacing:-0.04em}
+.step h3{font-size:26px;margin:18px 0 10px}
+.step p{color:var(--soft);font-size:16px}
+.quote{margin:64px 0 0;padding:40px 48px;background:var(--deep);color:#F3F1E9;position:relative}
+.quote q{display:block;font:italic 400 clamp(24px,2.8vw,34px)/1.3 var(--serif);quotes:"“" "”";max-width:28em}
+.quote::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--mint)}
 
-/* Tabla de impacto, estilo informe */
-table{width:100%;border-collapse:collapse;font-size:15.5px}
-thead th{font:500 11.5px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);text-align:left;padding:0 12px 10px 0;border-bottom:1px solid var(--ink)}
-tbody td{padding:14px 12px 14px 0;border-bottom:1px solid var(--hair);vertical-align:top}
-td.t{font-family:var(--mono);font-size:14.5px;white-space:nowrap}
-td.t.up{color:var(--accent);font-weight:500}
-td.q{color:var(--soft)}
-.foot{font-size:13px;color:var(--soft);margin-top:12px}
-.foot::before{content:"* ";}
+/* Casos */
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.case{background:var(--white);border:1px solid var(--hair);display:flex;flex-direction:column}
+.case .top{padding:28px 28px 0}
+.case h3{font-size:25px;line-height:1.18;margin:12px 0 20px}
+.case dl{margin:0;display:grid;gap:14px;font-size:15.5px}
+.case dt{font:600 11.5px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.case dd{margin:4px 0 0}
+.case .res{margin-top:auto;padding:22px 28px 26px;border-top:1px solid var(--hair);background:linear-gradient(180deg,#F1F6F2,#E7F0EA)}
+.case .res b{display:block;font:400 34px/1 var(--serif);color:var(--deep);letter-spacing:-0.02em;margin-top:22px}
+.case .res span{display:block;margin-top:8px;font-size:14px;color:var(--soft)}
+.case .res{margin-top:24px}
+.more{margin-top:44px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;border-top:1px solid var(--ink);padding-top:22px}
+.more h3{font-size:22px}
+.more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 36px;font-size:15.5px}
+.more li{padding-left:22px;position:relative}
+.more li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:1.5px;background:var(--accent)}
 
-/* Cita */
-.pull{margin:56px 0 0;padding:0;border:0}
-.pull q{display:block;font:italic 400 clamp(26px,3vw,36px)/1.25 var(--serif);quotes:"“" "”";letter-spacing:-0.01em}
-.pull q em{font-style:normal;color:var(--accent)}
-.pull span{display:block;margin-top:14px;font-size:14px;color:var(--soft)}
+/* Herramientas */
+.tint{background:#ECF2EE}
+.apps{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.app{background:var(--white);padding:34px 34px 30px;border:1px solid var(--hair);position:relative}
+.app h3{font-size:32px;margin:10px 0 12px}
+.app p{color:var(--soft);font-size:16px}
+.app .tag{display:inline-block;margin-top:20px;font:500 13px/1 var(--sans);color:var(--accent);padding-top:12px;border-top:1px solid var(--hair);width:100%}
+.mock{margin-top:22px;border:1px solid var(--hair);background:var(--paper);padding:14px;display:grid;gap:8px}
+.mock .row{display:grid;grid-template-columns:14px 1fr auto;gap:10px;align-items:center;font:400 12.5px/1.2 var(--mono);color:var(--soft)}
+.mock .row i{width:12px;height:12px;border:1.5px solid var(--accent);display:block}
+.mock .row.done i{background:var(--accent)}
+.mock .row b{font-weight:500;color:var(--ink)}
 
-/* Tres columnas de texto, no tarjetas */
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px}
-.cols h3{font-size:24px;padding-bottom:10px;border-bottom:1px solid var(--ink);margin-bottom:14px}
-.cols ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:15px;color:var(--soft)}
-.cols li strong{color:var(--ink);font-weight:500}
-.cadence{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:10px 28px;font-size:15px;border-top:1px solid var(--hair);padding-top:18px}
-.cadence dt{font:500 12px/1.9 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
-.cadence dd{margin:0}
-
-/* Casos numerados */
-.cases{counter-reset:c;border-top:1px solid var(--ink)}
-.case{display:grid;grid-template-columns:56px minmax(0,1fr);gap:0 20px;padding:24px 0;border-bottom:1px solid var(--hair)}
-.case::before{counter-increment:c;content:counter(c,decimal-leading-zero);font:400 15px/1.7 var(--mono);color:var(--soft)}
-.case h3{font-size:23px;line-height:1.25;margin-bottom:8px}
-.case p{color:var(--soft);font-size:15.5px}
-.case .caught{margin-top:10px;color:var(--ink);font-size:15px}
-.case .caught i{font-family:var(--serif);font-size:16px;color:var(--accent);margin-right:6px}
-.case.lead-case h3{font-size:27px}
-.flow{margin-top:12px;font:400 13.5px/1.6 var(--mono);color:var(--ink)}
-.flow i{font-style:normal;color:var(--soft);padding:0 6px}
-
-/* Dos herramientas */
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;border-top:1px solid var(--ink)}
-.tool{padding-top:20px}
-.tool .k{font:500 11.5px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
-.tool h3{font-size:30px;margin:8px 0 10px}
-.tool > p{color:var(--soft);font-size:15.5px;margin-bottom:14px}
-.tool ul{margin:0;padding-left:18px;display:grid;gap:7px;font-size:15px}
-.tool ul li::marker{color:var(--soft)}
-.tool .data{margin-top:16px;font-family:var(--serif);font-style:italic;color:var(--accent)}
-.principles{margin-top:36px;display:grid;grid-template-columns:repeat(4,1fr);gap:0 24px;border-top:1px solid var(--hair);padding-top:18px}
-.principles b{display:block;font:500 13px/1.4 var(--sans);margin-bottom:4px}
-.principles span{font-size:14px;color:var(--soft);line-height:1.5}
-
-/* Logros */
-.wins{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
-.wins li{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;padding:16px 0;border-bottom:1px solid var(--hair);font-size:15.5px}
-.wins .act{color:var(--soft)}
-.wins .res{font-family:var(--serif);font-size:18px;line-height:1.35}
+/* Día a día */
+.verbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--ink)}
+.verb{padding:26px 28px 6px 0}
+.verb + .verb{padding-left:28px;border-left:1px solid var(--hair)}
+.verb h3{font-size:34px;font-style:italic;color:var(--accent)}
+.verb ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px;font-size:16px}
 
 /* Trayectoria */
-.cvt{border-top:1px solid var(--ink)}
-.job{display:grid;grid-template-columns:130px minmax(0,1fr);gap:0 24px;padding:16px 0;border-bottom:1px solid var(--hair)}
-.job .when{font:400 13.5px/1.9 var(--mono);color:var(--soft)}
-.job h3{font-family:var(--sans);font-weight:600;font-size:16.5px;letter-spacing:0}
-.job .where{color:var(--soft);font-size:15px}
-.job p{color:var(--soft);font-size:15px;margin-top:6px}
-.sub{font:500 11.5px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:40px 0 0;padding-bottom:10px}
-.inline{font-size:15.5px;line-height:1.9}
-.inline span + span::before{content:"  ·  ";color:var(--hair);white-space:pre}
+.tl{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:64px}
+.tl-list{list-style:none;margin:0;padding:0 0 0 28px;border-left:1.5px solid var(--hair);display:grid;gap:30px}
+.tl-list li{position:relative}
+.tl-list li::before{content:"";position:absolute;left:-36px;top:7px;width:13px;height:13px;border-radius:50%;background:var(--paper);border:2px solid var(--accent)}
+.tl-list li.on::before{background:var(--accent)}
+.tl-list .d{font:500 13px/1 var(--mono);color:var(--soft)}
+.tl-list h3{font-size:22px;margin:8px 0 2px}
+.tl-list .w{color:var(--soft);font-size:15px}
+.tl-list p{margin-top:8px;font-size:15.5px}
+.side h4{font:600 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+.side ul{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:9px;font-size:15.5px}
+.side li{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--hair);padding-bottom:9px}
+.side li span{color:var(--soft);font-family:var(--mono);font-size:13px;white-space:nowrap}
+.side p{font-size:15.5px;margin-bottom:30px}
+
+/* Descarga del CV */
+.dl{background:var(--deep);color:#F3F1E9;padding:84px 0}
+.dl .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center}
+.dl .k{color:var(--mint)}
+.dl h2{font-size:clamp(32px,4vw,48px);margin-top:12px}
+.dl p{color:#CFD3C9;margin-top:10px;font-size:18px}
+.files{display:flex;gap:12px;flex-wrap:wrap}
+.file{display:flex;flex-direction:column;gap:6px;min-width:150px;padding:18px 20px;background:rgba(243,241,233,.06);border:1px solid rgba(243,241,233,.22);text-decoration:none;transition:background .15s ease,transform .15s ease}
+.file:hover{background:rgba(168,213,189,.14);transform:translateY(-2px)}
+.file b{font:400 22px/1 var(--serif);color:#F8F6EF}
+.file span{font-size:12.5px;color:var(--mint);display:flex;align-items:center;gap:6px}
+.file svg{width:14px;height:14px}
 
 /* Contacto */
-.contact{padding:96px 0 40px}
-.contact h2{font-size:clamp(36px,4.8vw,60px);line-height:1.05;max-width:13em}
-.contact .intro{margin-top:18px}
-.cdetails{margin-top:40px;display:grid;grid-template-columns:auto 1fr;gap:12px 28px;font-size:16px;border-top:1px solid var(--ink);padding-top:20px;max-width:620px}
-.cdetails dt{font:500 12px/1.9 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
-.cdetails dd{margin:0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.copy{font:500 12.5px/1 var(--sans);background:none;border:1px solid var(--hair);color:var(--ink);padding:6px 10px;cursor:pointer}
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:end}
+.contact h2{font-size:clamp(48px,6vw,80px);line-height:1;margin-top:14px}
+.contact .lead2{font-family:var(--serif);font-size:21px;line-height:1.45;margin-top:20px;max-width:26em}
+.cbox{display:grid;gap:0;border-top:1px solid var(--ink)}
+.cbox div{display:grid;grid-template-columns:100px 1fr;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--hair);font-size:16.5px}
+.cbox dt,.cbox .lbl{font:600 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.cbox a{text-decoration:none;border-bottom:1px solid var(--hair);overflow-wrap:anywhere}
+.cbox a:hover{border-color:var(--ink)}
+.copy{font:500 12.5px/1 var(--sans);background:none;border:1px solid var(--hair);padding:7px 10px;margin-left:12px;cursor:pointer;color:var(--ink)}
 .copy:hover{border-color:var(--ink)}
-footer{margin-top:96px;border-top:1px solid var(--hair);padding:22px 0 44px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--soft)}
-
-
-/* Portada en bloque de color: foto a la izquierda, texto a la derecha */
-.cover{margin-top:28px;padding:56px 56px;background:#143628;color:#F2F0E8;position:relative;overflow:hidden}
-.cover::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:1px solid rgba(242,240,232,.10);box-shadow:0 0 0 60px rgba(242,240,232,.03),0 0 0 140px rgba(242,240,232,.02);pointer-events:none}
-.cover .cover-grid{grid-template-columns:250px minmax(0,1fr);gap:56px;align-items:center;position:relative;z-index:1}
-.cover .kicker{color:#A9D3BC}
-.cover h1{color:#F7F5EE}
-.cover h1 em{color:#A9D3BC}
-.cover .lead{color:#E4E2D8}
-.cover .links a{color:#F7F5EE;text-decoration-color:rgba(247,245,238,.35)}
-.cover .links a:hover{text-decoration-color:#F7F5EE}
-.cover .portrait{background:#F7F5EE;border:0;padding:10px 10px 12px;transform:rotate(-1.2deg);box-shadow:0 24px 50px -20px rgba(0,0,0,.55)}
-.cover .portrait figcaption b{color:#151816}
-.cover .portrait figcaption span{color:#5E6661}
-.keys{margin-top:0}
-@media (max-width:900px){
-  .cover{padding:40px 28px}
-  .cover .cover-grid{grid-template-columns:150px minmax(0,1fr);gap:28px;align-items:start}
-  .cover .portrait{max-width:none;order:0}
-  .cover h1{font-size:clamp(36px,6vw,56px)}
-}
-@media (max-width:560px){
-  .cover{padding:28px 20px;margin-left:-18px;margin-right:-18px}
-  .cover .cover-grid{grid-template-columns:1fr}
-  .cover .portrait{width:170px}
-}
+footer{border-top:1px solid var(--hair);padding:26px 0 44px;font-size:13px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 @media (prefers-reduced-motion: no-preference){
-  .cover h1,.cover .lead,.portrait{animation:in .8s cubic-bezier(.2,.7,.2,1) both}
-  .cover .lead{animation-delay:.08s}.portrait{animation-delay:.16s}
+  .hero h1,.hero .lead,.btns,.polaroid{animation:up .8s cubic-bezier(.2,.7,.2,1) both}
+  .hero .lead{animation-delay:.08s}.btns{animation-delay:.14s}.polaroid{animation-delay:.05s}
+  .stats-in{animation:up .8s .25s cubic-bezier(.2,.7,.2,1) both}
 }
-@keyframes in{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
+.polaroid{animation-name:upr}
+@keyframes upr{from{opacity:.001;transform:translateY(14px) rotate(-2deg)}to{opacity:1;transform:rotate(-2deg)}}
 
-@media (max-width:900px){
-  .row{grid-template-columns:1fr;gap:10px}
-  .side{padding-top:0}
-  .cover-grid{grid-template-columns:1fr;gap:40px}
-  .portrait{max-width:220px;order:-1}
-  .cols,.pair,.principles{grid-template-columns:1fr;gap:28px}
-  .principles{gap:16px}
+@media (max-width:980px){
+  .bar nav{display:none}
+  .hero{padding:64px 0 130px}
+  .hero .wrap{grid-template-columns:200px minmax(0,1fr);gap:40px;align-items:start}
+  .cases{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;gap:34px}
+  .step,.step + .step{padding:0;border-left:0}
+  .apps,.tl,.contact .wrap,.dl .wrap{grid-template-columns:1fr;gap:36px}
+  .more{grid-template-columns:1fr}
 }
-@media (max-width:560px){
-  .keys{grid-template-columns:1fr}
-  .key + .key{padding-left:0;border-left:0;border-top:1px solid var(--hair)}
+@media (max-width:640px){
   body{font-size:16px}
-  .page{padding:0 18px}
-  .cover{padding:56px 0 48px}
-  .wins li,.job{grid-template-columns:1fr;gap:4px}
-  table thead{display:none}
-  table,tbody,tr,td{display:block;width:100%}
-  tbody tr{padding:12px 0;border-bottom:1px solid var(--hair)}
-  tbody td{border:0;padding:2px 0}
-  .case{grid-template-columns:1fr;gap:4px}
+  .wrap{padding:0 20px}
+  .sec{padding:72px 0}
+  .hero .wrap{grid-template-columns:1fr}
+  .polaroid{width:210px}
+  .stats-in{grid-template-columns:1fr}
+  .stat + .stat{border-left:0;border-top:1px solid var(--hair)}
+  .verbs{grid-template-columns:1fr}
+  .verb + .verb{padding-left:0;border-left:0;border-top:1px solid var(--hair)}
+  .more ul{grid-template-columns:1fr}
+  .quote{padding:30px 26px}
 }
 </style>
 </head>
 <body>
-<div class="page">
 
-<header class="top">
-  <span class="who">Alejandro Linares García</span>
-  <div class="lang" role="group" aria-label="Idioma">
-    <button type="button" id="l-es" data-lang="es" aria-pressed="true">ES</button><span>/</span>
-    <button type="button" id="l-ca" data-lang="ca" aria-pressed="false">CA</button><span>/</span>
-    <button type="button" id="l-en" data-lang="en" aria-pressed="false">EN</button>
+<header class="bar">
+  <div class="wrap">
+    <a class="who" href="#top">Alejandro Linares<span>.</span></a>
+    <div class="right">
+      <nav aria-label="Secciones"><a href="#casos" data-i18n="nav1">Casos</a><a href="#como" data-i18n="nav2">Cómo trabajo</a><a href="#trayectoria" data-i18n="nav3">Trayectoria</a><a href="#cv" data-i18n="nav4">CV</a></nav>
+      <div class="lang" role="group" aria-label="Idioma"><button type="button" id="l-es" data-lang="es" aria-pressed="true">ES</button><button type="button" id="l-ca" data-lang="ca" aria-pressed="false">CA</button><button type="button" id="l-en" data-lang="en" aria-pressed="false">EN</button></div>
+    </div>
   </div>
 </header>
 
-<main>
-<div class="cover">
-  <div class="cover-grid">
-    <figure class="portrait">
-      <img src="foto.jpg" alt="Retrato de Alejandro Linares García" data-i18n-alt="alt" width="600" height="720">
-      <figcaption><b>Alejandro Linares</b><span>Barcelona</span></figcaption>
-    </figure>
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <figure class="polaroid"><img src="foto.jpg" alt="Retrato de Alejandro Linares García" data-alt="alt" width="600" height="720"><figcaption><b>Alejandro Linares</b><span>Barcelona</span></figcaption></figure>
     <div>
-      <p class="kicker" data-i18n="eyebrow">Operaciones financieras · Real estate · Barcelona</p>
+      <p class="k" data-i18n="kicker">Finanzas operativas · Automatización con IA · Barcelona</p>
       <h1 data-i18n="h1">Que el dinero entre, <em>cuadre</em> y esté previsto.</h1>
-      <p class="lead" data-i18n="lead">Soy <strong>Alejandro Linares</strong>. Llevo el ciclo de cobro, la conciliación y la tesorería operativa de una empresa de real estate residencial. Y cada proceso que se repite lo convierto en una herramienta con <strong>Python e IA</strong>, con reglas claras y control humano.</p>
-      <p class="links"><a href="#automatizacion" data-i18n="cta1">Ver qué automatizo</a><a href="#contacto" data-i18n="cta2">Contactar</a></p>
-    </div>
-  </div>
-</div>
-
-<div class="keys">
-  <div class="key"><b data-i18n="f1a">+4 años</b><span data-i18n="f1b">en operaciones financieras</span></div>
-  <div class="key"><b data-i18n="f2a">+15 procesos</b><span data-i18n="f2b">recurrentes bajo mi gestión</span></div>
-  <div class="key"><b>5 h → 30 min</b><span data-i18n="bk">Pagos delegados, por ciclo</span></div>
-</div>
-
-<section id="impacto">
-  <div class="row">
-    <div class="side"><span class="n">i.</span><span data-i18n="impS">Impacto</span></div>
-    <div class="main">
-      <h2 data-i18n="impH">Menos horas, menos errores</h2>
-      <table>
-        <thead><tr><th data-i18n="ih1">Proceso</th><th data-i18n="ih2">Tiempo</th><th data-i18n="ih3">Calidad</th></tr></thead>
-        <tbody>
-          <tr><td data-i18n="ip1">Pagos delegados a propietarios</td><td class="t up">~5 h → ~30 min</td><td class="q" data-i18n="iq1">Control de pendientes entre ciclos</td></tr>
-          <tr><td data-i18n="ip2">Remesas SEPA</td><td class="t up" data-i18n="it2">De horas a minutos</td><td class="q" data-i18n="iq2">Sin rechazos en banca online</td></tr>
-          <tr><td data-i18n="ip3">Recargos por demora</td><td class="t up" data-i18n="it3">De horas a minutos</td><td class="q" data-i18n="iq3">Sin errores de tecleo ni de reserva</td></tr>
-          <tr><td data-i18n="ip4">Conciliación de plataformas</td><td class="t" data-i18n="it4">La mitad de tiempo</td><td class="q" data-i18n="iq4">Alertas de abonos sin cruce y sobrepagos</td></tr>
-          <tr><td data-i18n="ip5">Devolución de fianzas</td><td class="t" data-i18n="it5">Mismo tiempo</td><td class="q" data-i18n="iq5">Muchos menos errores y control de integridad</td></tr>
-          <tr><td data-i18n="ip6">Cierre de cuentas a cobrar</td><td class="t" data-i18n="it6">Mismo tiempo</td><td class="q" data-i18n="iq6">Cada caso con acción, responsable y fecha</td></tr>
-        </tbody>
-      </table>
-      <p class="foot" data-i18n="inote">Tiempos aproximados. En todos los casos reviso el resultado antes de darlo por bueno.</p>
-      <blockquote class="pull">
-        <q data-i18n="pq">El script hace lo determinista, yo decido las excepciones y <em>nada se escribe en el ERP sin intervención humana.</em></q>
-        <span data-i18n="pqs">El criterio común de todo lo que construyo.</span>
-      </blockquote>
-    </div>
-  </div>
-</section>
-
-<section id="que-hago">
-  <div class="row">
-    <div class="side"><span class="n">ii.</span><span data-i18n="s1e">Qué hago</span></div>
-    <div class="main">
-      <h2 data-i18n="s1h">Tres verbos que resumen mi trabajo</h2>
-      <p class="intro" data-i18n="s1p">Trabajo para varias sociedades del grupo y me coordino a diario con contabilidad, tesorería, comercial, IT y jurídico.</p>
-    </div>
-  </div>
-  <div class="row" style="margin-top:36px">
-    <div class="side"></div>
-    <div>
-      <div class="cols">
-        <div><h3 data-i18n="c1h">Entra</h3><ul><li data-i18n="c1a">Remesas de cobro por domiciliación SEPA</li><li data-i18n="c1b">Cuentas a cobrar: clasificación del saldo abierto y plan de acción con responsable y fecha</li><li data-i18n="c1c">Recargos por demora, impagos y listados de reclamación</li></ul></div>
-        <div><h3 data-i18n="c2h">Cuadra</h3><ul><li data-i18n="c2a">Contabilización de facturas de clientes y proveedores en el ERP</li><li data-i18n="c2b">Conciliación bancaria, de TPV y de plataformas de reserva</li><li data-i18n="c2c">Detección de anticipos y control de firma de contratos</li></ul></div>
-        <div><h3 data-i18n="c3h">Está previsto</h3><ul><li data-i18n="c3a">Previsión de tesorería y modelo mensual de ingresos</li><li data-i18n="c3b">Pagos delegados a propietarios y devoluciones de fianzas, listos para autorización</li><li data-i18n="c3c">Proformas, anexos e informes históricos a demanda</li></ul></div>
-      </div>
-      <dl class="cadence">
-        <dt data-i18n="rh1k">Cada día</dt><dd data-i18n="rh1">Contabilización de facturas y conciliación de banco, TPV y plataformas</dd>
-        <dt data-i18n="rh2k">Cada semana</dt><dd data-i18n="rh2">Devolución de fianzas y control de contratos firmados</dd>
-        <dt data-i18n="rh3k">Cada mes</dt><dd data-i18n="rh3">Dos remesas SEPA, pagos delegados, recargos, cierre de cuentas a cobrar, previsión de tesorería y modelo de ingresos</dd>
-      </dl>
-    </div>
-  </div>
-</section>
-
-<section id="automatizacion">
-  <div class="row">
-    <div class="side"><span class="n">iii.</span><span data-i18n="s2e">Automatización</span></div>
-    <div class="main">
-      <h2 data-i18n="s2h">Lo que hago a mano una vez, la segunda lo automatizo</h2>
-      <p class="intro" data-i18n="s2p">No soy programador, y no lo necesito: yo defino las reglas y las casuísticas del negocio, la IA escribe el código y yo lo ejecuto, lo pruebo y valido cada resultado contra los sistemas. Todo funciona en local y con modo prueba antes de tocar nada.</p>
-      <div class="cases">
-        <article class="case lead-case"><div><h3 data-i18n="k0h">Un sistema por proceso, con una sola fuente de reglas</h3><p data-i18n="k0p">Cada proceso tiene su proyecto de IA con un documento de reglas propio, y skills compartidas de contexto, política de uso y comunicación. Las reglas ya decididas no se vuelven a preguntar y el proceso no depende de una sola persona.</p>
-          <p class="flow"><span data-i18n="fl1">Descarga automática</span><i>→</i><span data-i18n="fl2">reparto por proceso</span><i>→</i><span data-i18n="fl3">reglas + Python</span><i>→</i><span data-i18n="fl4">decisiones en ventana</span><i>→</i><span data-i18n="fl5">Excel / PDF / XML</span></p></div></article>
-        <article class="case"><div><h3 data-i18n="k1h">Remesas SEPA</h3><p data-i18n="k1p">Genera el XML respetando la plantilla bancaria y el PDF de firmas, con una hoja de ajustes que confirmo yo.</p><p class="caught"><i data-i18n="det">Detecta</i><span data-i18n="k1c">Referencias duplicadas, IBAN mal formados e importes a cero, negativos o incoherentes. Acabó con los rechazos en banca online.</span></p></div></article>
-        <article class="case"><div><h3 data-i18n="k2h">Devolución de fianzas</h3><p data-i18n="k2p">Triaje automático: descarta lo excluible, solo me pregunta lo dudoso, cruza con el ERP y prepara Excel y correos.</p><p class="caught"><i data-i18n="det">Detecta</i><span data-i18n="k2c">Importes mal calculados, deudas duplicadas, casos indebidos y casos que se quedan fuera.</span></p></div></article>
-        <article class="case"><div><h3 data-i18n="k3h">Conciliación de plataformas y TPV</h3><p data-i18n="k3p">Cruza abonos con reservas y facturas, y casa los ingresos diarios del TPV con los cobros, dejando los asientos preparados.</p><p class="caught"><i data-i18n="det">Detecta</i><span data-i18n="k3c">Abonos sin cruce, sobrepagos, comisiones distintas de las esperadas y diferencias de importe.</span></p></div></article>
-        <article class="case"><div><h3 data-i18n="k4h">Cuentas a cobrar con mesa de decisiones</h3><p data-i18n="k4p">Pasé de clasificar el saldo a cerrarlo: cada caso sale con acción, responsable y fecha desde una ventana de decisiones.</p><p class="caught"><i data-i18n="det">Detecta</i><span data-i18n="k4c">Descuadres de céntimos, deuda cruzada entre sociedades y casos estancados durante meses.</span></p></div></article>
-        <article class="case"><div><h3 data-i18n="k5h">Recargos por demora</h3><p data-i18n="k5p">Cálculo y auditoría mensual, y aplicación masiva en el sistema de gestión con modo prueba previo.</p><p class="caught"><i data-i18n="det">Detecta</i><span data-i18n="k5c">Errores de tecleo y de selección de reserva al aplicarlos uno a uno.</span></p></div></article>
-        <article class="case"><div><h3 data-i18n="k6h">Tesorería, pagos y documentos</h3><p data-i18n="k6p">Previsión de tesorería generada en local sin subir datos a la IA, pagos delegados con control de pendientes entre ciclos y generador de proformas y anexos con IVA dinámico.</p></div></article>
-        <article class="case"><div><h3 data-i18n="k7h">La infraestructura que lo sostiene</h3><p data-i18n="k7p">Un robot de navegador que descarga cada día los informes de los sistemas, un repartidor que coloca cada fichero en su proceso y archiva por fecha sin borrar nunca, y un anonimizador local que enmascara los datos personales antes de cualquier uso de IA.</p><p class="caught"><i data-i18n="det">Detecta</i><span data-i18n="k7c">Versiones mezcladas, histórico perdido y exposición innecesaria de datos personales.</span></p></div></article>
+      <p class="lead" data-i18n="lead">Llevo los cobros, la conciliación y la tesorería operativa de un grupo inmobiliario. Mi especialidad: convertir el trabajo repetitivo en procesos que se hacen solos, sin perder el control.</p>
+      <div class="btns">
+        <a class="btn mint" href="#cv"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v9M4 7l4 4 4-4M2.5 14h11"/></svg><span data-i18n="cta1">Descargar CV</span></a>
+        <a class="btn ghost" href="#casos" data-i18n="cta2">Ver casos reales</a>
       </div>
     </div>
   </div>
 </section>
 
-<section id="herramientas">
-  <div class="row">
-    <div class="side"><span class="n">iv.</span><span data-i18n="s5e">Herramientas propias</span></div>
-    <div class="main">
-      <h2 data-i18n="s5h">Dos aplicaciones, un reparto claro de los datos</h2>
-      <p class="intro" data-i18n="s5p">Diseñé y construí las dos para organizar el área. Una organiza el trabajo; la otra procesa los datos, y nunca se mezclan.</p>
-      <div class="pair">
-        <div class="tool"><div class="k" data-i18n="a1k">Agenda de operaciones · en la nube</div><h3 data-i18n="a1h">Mi espacio</h3><p data-i18n="a1p">El panel desde el que organizo cada día de trabajo. Lo creé para sustituir Notion y lo consulto varias veces al día.</p>
-          <ul><li data-i18n="a1a">Calendario y tareas recurrentes con reglas diarias, semanales, de fin de mes, trimestrales y anuales</li><li data-i18n="a1b">Checklist de cierre por proceso y de cierre de mes, con avisos en el panel de hoy</li><li data-i18n="a1c">Base de conocimiento: procesos, documentos, enlaces y contactos</li><li data-i18n="a1d">Alta de tareas escribiendo en texto libre, sustituyendo los datos personales por un marcador</li><li data-i18n="a1e">Revisión de datos que avisa de información incompleta o sensible fuera de sitio</li></ul>
-          <p class="data" data-i18n="a1pill">Sin datos de clientes</p></div>
-        <div class="tool"><div class="k" data-i18n="a2k">Aplicación local · en construcción por fases</div><h3 data-i18n="a2h">Centro de operaciones</h3><p data-i18n="a2p">Donde viven y se procesan los datos, en el propio equipo.</p>
-          <ul><li data-i18n="a2a">Descarga diaria automática de los sistemas y ventana única de procesos</li><li data-i18n="a2b">Novedades de clientes y lista de cosas en las que actuar</li><li data-i18n="a2c">Pestaña de decisiones que reúne cuentas a cobrar y fianzas</li><li data-i18n="a2d">Almacén de decisiones y seguimiento de reclamaciones: el Excel pasa a ser solo salida</li><li data-i18n="a2e">Copia diaria de lo irreemplazable y versión guardada antes de cada cambio grande</li></ul>
-          <p class="data" data-i18n="a2pill">Datos solo en local</p></div>
-      </div>
-      <div class="principles">
-        <div><b data-i18n="d1k">Privacidad</b><span data-i18n="d1">Identificación por nº de reserva o factura, nunca por nombre ni datos bancarios.</span></div>
-        <div><b data-i18n="d2k">Una sola fuente</b><span data-i18n="d2">Las reglas viven en un único sitio; lo ya decidido no se vuelve a preguntar.</span></div>
-        <div><b data-i18n="d3k">Migraciones seguras</b><span data-i18n="d3">Solo se migra si el resultado coincide con el anterior en recuentos y huellas.</span></div>
-        <div><b data-i18n="d4k">Para cualquiera</b><span data-i18n="d4">Mismos botones y pasos siempre: lo puede usar cualquier compañero.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="stats"><div class="wrap"><div class="stats-in">
+  <div class="stat"><b>5 h → 30 min</b><span data-i18n="s1">Pagos a propietarios, por ciclo</span></div>
+  <div class="stat"><b data-i18n="s2v">0 rechazos</b><span data-i18n="s2">En remesas SEPA desde el rediseño</span></div>
+  <div class="stat"><b>+15</b><span data-i18n="s3">Procesos recurrentes bajo mi gestión</span></div>
+</div></div></div>
 
-<section id="logros">
-  <div class="row">
-    <div class="side"><span class="n">v.</span><span data-i18n="s6e">Logros</span></div>
-    <div class="main">
-      <h2 data-i18n="s6h">Acción y resultado</h2>
-      <ul class="wins">
-        <li><span class="act" data-i18n="w1a">Reescribí la generación de remesas para respetar la plantilla bancaria</span><span class="res" data-i18n="w1b">Desaparecieron los rechazos en banca online</span></li>
-        <li><span class="act" data-i18n="w2a">Pasé procesos hechos por chat a scripts locales con decisiones en ventana</span><span class="res" data-i18n="w2b">Los datos de clientes no salen del equipo y el proceso es repetible</span></li>
-        <li><span class="act" data-i18n="w3a">Consolidé reglas dispersas en un protocolo único por proceso</span><span class="res" data-i18n="w3b">Menos dependencia de una sola persona y ninguna regla perdida</span></li>
-        <li><span class="act" data-i18n="w4a">Cambié el cierre de cuentas a cobrar de clasificar a cerrar</span><span class="res" data-i18n="w4b">Menos casos estancados y reparto claro entre quien limpia y quien reclama</span></li>
-        <li><span class="act" data-i18n="w5a">Elaboré el registro de riesgos del departamento</span><span class="res" data-i18n="w5b">Mapa de riesgos y resumen ejecutivo para dirección</span></li>
-        <li><span class="act" data-i18n="w6a">Analicé el impacto de la nueva ley de vivienda proceso a proceso</span><span class="res" data-i18n="w6b">Prioridades claras para el equipo y contratos adaptados, también en inglés</span></li>
-        <li><span class="act" data-i18n="w7a">Impulsé la adopción de la IA en el equipo</span><span class="res" data-i18n="w7b">Uso integrado en el día a día, valorado expresamente por dirección</span></li>
-        <li><span class="act" data-i18n="w8a">Diseñé por módulos las mejoras del área de propietarios</span><span class="res" data-i18n="w8b">Plan listo para pasar a desarrollo</span></li>
-      </ul>
-    </div>
+<section class="sec" id="como"><div class="wrap">
+  <div class="sec-h"><p class="k" data-i18n="howk">Cómo trabajo</p><h2 data-i18n="howh">No programo. Diseño, pruebo y decido.</h2><p data-i18n="howp">La IA es mi herramienta, no mi sustituta. El criterio financiero lo pongo yo.</p></div>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><h3 data-i18n="st1h">Entiendo el proceso</h3><p data-i18n="st1">Desmonto cada tarea en reglas, excepciones y casos raros. Es la parte que más tiempo lleva y la que más importa.</p></div>
+    <div class="step"><div class="n">02</div><h3 data-i18n="st2h">La IA escribe el código</h3><p data-i18n="st2">Con esas reglas, la IA genera scripts en Python que leen los informes del ERP y preparan el trabajo.</p></div>
+    <div class="step"><div class="n">03</div><h3 data-i18n="st3h">Yo valido y decido</h3><p data-i18n="st3">Pruebo en modo seguro, contrasto con el sistema y apruebo. Nada entra en el ERP sin mi revisión.</p></div>
   </div>
-</section>
+  <blockquote class="quote"><q data-i18n="pq">El script hace lo determinista, yo decido las excepciones y nada se escribe en el ERP sin intervención humana.</q></blockquote>
+</div></section>
 
-<section id="trayectoria">
-  <div class="row">
-    <div class="side"><span class="n">vi.</span><span data-i18n="s3e">Trayectoria</span></div>
-    <div class="main">
-      <h2 data-i18n="s3h">De la gestión administrativa a las finanzas operativas</h2>
-      <div class="cvt">
-        <div class="job"><div class="when">2022 – <span data-i18n="today">hoy</span></div><div><h3 data-i18n="j1">Administrativo de Operaciones Financieras</h3><div class="where">Cotown Group · Barcelona</div><p data-i18n="j1p">Empecé en prácticas en administración y contabilidad y me incorporé a la plantilla al terminarlas. Hoy llevo cobros, conciliación y tesorería operativa, e impulso la automatización de los procesos del área.</p></div></div>
-        <div class="job"><div class="when">2019 – 2020</div><div><h3 data-i18n="j2">Mozo de almacén</h3><div class="where">Ferretería Candau · Mataró</div></div></div>
-        <div class="job"><div class="when">2017 – 2018</div><div><h3 data-i18n="j3">Técnico de marketing en prácticas</h3><div class="where">OnTrace Intelligent Video Analytics · Mataró</div></div></div>
-        <div class="job"><div class="when">2015 – 2016</div><div><h3 data-i18n="j4">Auxiliar administrativo en prácticas</h3><div class="where">Deor Consultores · Mataró</div></div></div>
-      </div>
-      <p class="sub" data-i18n="edu">Formación</p>
-      <div class="cvt">
-        <div class="job"><div class="when">2018 – 2024</div><div><h3 data-i18n="e1">Grado en Sociología</h3><div class="where">Universitat de Barcelona</div><p data-i18n="e1p">Compaginado con trabajo durante buena parte de la carrera.</p></div></div>
-        <div class="job"><div class="when">2016 – 2018</div><div><h3 data-i18n="e2">CFGS Marketing y Publicidad</h3><div class="where">Escola Pia Santa Anna · Mataró</div></div></div>
-        <div class="job"><div class="when">2014 – 2016</div><div><h3 data-i18n="e3">CFGM Gestión Administrativa</h3><div class="where">Escola Pia Santa Anna · Mataró</div></div></div>
-      </div>
-      <p class="sub" data-i18n="skills">Competencias</p>
-      <p class="inline"><span data-i18n="sk1">Conciliación contable y bancaria</span><span data-i18n="sk2">Cuentas a cobrar y tesorería</span><span data-i18n="sk9">Diseño funcional de automatizaciones</span><span data-i18n="sk3">Modelado de reglas de negocio</span><span data-i18n="sk4">Pruebas y validación de scripts</span><span data-i18n="sk5">Documentación de procesos</span><span data-i18n="sk6">Protección de datos aplicada</span><span data-i18n="sk7">Mejora continua</span><span data-i18n="sk8">Gestión del cambio</span></p>
-      <p class="sub" data-i18n="tools">Herramientas</p>
-      <p class="inline"><span data-i18n="t1">ERP contable (SAP Business ByDesign)</span><span data-i18n="t2">Excel avanzado</span><span data-i18n="t7">Python: diseño y validación</span><span>HTML / JS</span><span data-i18n="t3">Scripts .bat</span><span data-i18n="t4">Automatización de navegador</span><span>Claude · ChatGPT</span><span>Power BI</span><span data-i18n="t5">Banca online y SEPA</span><span data-i18n="t6">Firma electrónica</span></p>
-      <p class="sub" data-i18n="langs">Idiomas</p>
-      <p class="inline"><span><span data-i18n="es">Español</span> <span class="soft" data-i18n="native">· nativo</span></span><span><span data-i18n="cat">Catalán</span> <span data-i18n="native">· nativo</span></span><span><span data-i18n="eng">Inglés</span> <span data-i18n="engl">· intermedio, buena comprensión</span></span></p>
-    </div>
+<section class="sec" id="casos" style="padding-top:0"><div class="wrap">
+  <div class="sec-h"><p class="k" data-i18n="casek">Casos</p><h2 data-i18n="caseh">Tres problemas reales, tres resultados</h2><p data-i18n="casep">Situaciones del día a día y cómo las resolví.</p></div>
+  <div class="cases">
+    <article class="case"><div class="top"><p class="k" data-i18n="c1k">Pagos a propietarios</p><h3 data-i18n="c1h">Cinco horas convertidas en media</h3>
+      <dl><div><dt data-i18n="lp">Problema</dt><dd data-i18n="c1p">Cada ciclo había que cruzar a mano lo cobrado y lo pendiente de cada propietario, factura a factura.</dd></div><div><dt data-i18n="ls">Solución</dt><dd data-i18n="c1s">Un script cruza proveedor contra cliente, aparca lo que no se puede pagar y deja el soporte listo para firmar.</dd></div></dl></div>
+      <div class="res"><b data-i18n="c1r">~5 h → ~30 min</b><span data-i18n="c1l">por ciclo, revisión incluida</span></div></article>
+    <article class="case"><div class="top"><p class="k" data-i18n="c2k">Remesas SEPA</p><h3 data-i18n="c2h">De rechazos del banco a cero incidencias</h3>
+      <dl><div><dt data-i18n="lp">Problema</dt><dd data-i18n="c2p">Montar las remesas llevaba horas y el banco devolvía ficheros por errores de formato.</dd></div><div><dt data-i18n="ls">Solución</dt><dd data-i18n="c2s">Rediseñé la generación del fichero respetando la plantilla bancaria, con controles de IBAN, duplicados e importes.</dd></div></dl></div>
+      <div class="res"><b data-i18n="c2r">0 rechazos</b><span data-i18n="c2l">y de horas a minutos</span></div></article>
+    <article class="case"><div class="top"><p class="k" data-i18n="c3k">Devolución de fianzas</p><h3 data-i18n="c3h">Menos errores en cada lote semanal</h3>
+      <dl><div><dt data-i18n="lp">Problema</dt><dd data-i18n="c3p">Contabilidad encontraba errores casi cada semana: importes mal calculados, deudas duplicadas, casos olvidados.</dd></div><div><dt data-i18n="ls">Solución</dt><dd data-i18n="c3s">Triaje automático que solo me pregunta lo dudoso, cruce con el ERP y comprobación de integridad antes de entregar.</dd></div></dl></div>
+      <div class="res"><b data-i18n="c3r">Muchos menos errores</b><span data-i18n="c3l">con control en cada ciclo</span></div></article>
   </div>
-</section>
+  <div class="more"><h3 data-i18n="moreh">También automatizado</h3><ul><li data-i18n="m1">Conciliación de plataformas de reserva, en la mitad de tiempo</li><li data-i18n="m2">Conciliación de TPV con los asientos preparados</li><li data-i18n="m3">Recargos por demora aplicados en minutos</li><li data-i18n="m4">Cuentas a cobrar con un plan de acción por caso</li><li data-i18n="m5">Proformas y anexos con el IVA calculado</li><li data-i18n="m6">Descarga diaria de informes y archivo automático</li><li data-i18n="m7">Anonimizador local para proteger datos personales</li><li data-i18n="m8">Previsión de tesorería generada en local</li></ul></div>
+</div></section>
 
-<section id="contacto" class="contact">
-  <div class="row">
-    <div class="side"><span class="n">vii.</span><span data-i18n="s4e">Contacto</span></div>
-    <div class="main">
-      <h2 data-i18n="s4h">¿Hablamos de procesos que cuadran solos?</h2>
-      <p class="intro" data-i18n="s4p">Si trabajas en finanzas, operaciones o real estate y te interesa aplicar la IA al día a día del departamento con rigor, escríbeme.</p>
-      <dl class="cdetails">
-        <dt>Email</dt><dd><a id="mail" href="#contacto">…</a><button type="button" class="copy" id="copy" data-i18n="copy">Copiar</button></dd>
-        <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/alejandro-linares-garcia" target="_blank" rel="noopener">linkedin.com/in/alejandro-linares-garcia</a></dd>
-        <dt data-i18n="city">Ciudad</dt><dd>Barcelona</dd>
-      </dl>
+<section class="sec tint"><div class="wrap">
+  <div class="sec-h"><p class="k" data-i18n="toolk">Herramientas propias</p><h2 data-i18n="toolh">Dos aplicaciones que diseñé</h2><p data-i18n="toolp">Una organiza mi trabajo. La otra procesa los datos. Nunca se mezclan.</p></div>
+  <div class="apps">
+    <div class="app"><p class="k" data-i18n="t1tag">Sin datos de clientes</p><h3 data-i18n="t1h">Mi espacio</h3><p data-i18n="t1">Mi agenda de operaciones: tareas recurrentes, checklists de cierre y base de conocimiento. Sustituyó a Notion y la uso varias veces al día.</p>
+      <div class="mock" aria-hidden="true"><div class="row done"><i></i><b>09:15 · Conciliación</b><span>✓</span></div><div class="row done"><i></i><b>11:15 · Devoluciones</b><span>✓</span></div><div class="row"><i></i><b>15:00 · Previsión de caja</b><span>—</span></div></div></div>
+    <div class="app"><p class="k" data-i18n="t2tag">Datos solo en local</p><h3 data-i18n="t2h">Centro de operaciones</h3><p data-i18n="t2">Aplicación local que descarga los datos cada día, avisa de novedades y reúne las decisiones pendientes en una sola pantalla.</p>
+      <div class="mock" aria-hidden="true"><div class="row done"><i></i><b>Descarga diaria</b><span>07:30</span></div><div class="row done"><i></i><b>Novedades</b><span>12</span></div><div class="row"><i></i><b>Para decidir</b><span>3</span></div></div></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="sec-h"><p class="k" data-i18n="dayk">Qué hago</p><h2 data-i18n="dayh">Mi día a día</h2></div>
+  <div class="verbs">
+    <div class="verb"><h3 data-i18n="v1">Entra</h3><ul><li data-i18n="v1a">Remesas de cobro SEPA</li><li data-i18n="v1b">Cuentas a cobrar B2B y B2C</li><li data-i18n="v1c">Recargos e impagos</li></ul></div>
+    <div class="verb"><h3 data-i18n="v2">Cuadra</h3><ul><li data-i18n="v2a">Conciliación bancaria y de TPV</li><li data-i18n="v2b">Plataformas de reserva</li><li data-i18n="v2c">Contabilización en SAP ByDesign</li></ul></div>
+    <div class="verb"><h3 data-i18n="v3">Está previsto</h3><ul><li data-i18n="v3a">Previsión de tesorería</li><li data-i18n="v3b">Pagos a propietarios</li><li data-i18n="v3c">Devolución de fianzas</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="trayectoria" style="padding-top:0"><div class="wrap">
+  <div class="sec-h"><p class="k" data-i18n="cvk">Trayectoria</p><h2 data-i18n="cvh">De la administración a las finanzas operativas</h2></div>
+  <div class="tl">
+    <ol class="tl-list">
+      <li class="on"><span class="d">2022 – <span data-i18n="now">hoy</span></span><h3 data-i18n="j1">Administrativo de Operaciones Financieras</h3><div class="w">Cotown Group · Barcelona</div><p data-i18n="j1p">Entré en prácticas y me quedé. Hoy llevo cobros, conciliación y tesorería operativa, e impulso la automatización del área.</p></li>
+      <li><span class="d">2017 – 2018</span><h3 data-i18n="j2">Técnico de marketing (prácticas)</h3><div class="w">OnTrace Intelligent Video Analytics · Mataró</div></li>
+      <li><span class="d">2015 – 2016</span><h3 data-i18n="j3">Auxiliar administrativo (prácticas)</h3><div class="w">Deor Consultores · Mataró</div></li>
+    </ol>
+    <div class="side">
+      <h4 data-i18n="edu">Formación</h4>
+      <ul><li><b data-i18n="e1" style="font-weight:500">Grado en Sociología</b><span>2018–2024</span></li><li><b data-i18n="e2" style="font-weight:500">CFGS Marketing y Publicidad</b><span>2016–2018</span></li><li><b data-i18n="e3" style="font-weight:500">CFGM Gestión Administrativa</b><span>2014–2016</span></li><li><b data-i18n="e4" style="font-weight:500">IA aplicada a la empresa (en curso)</b><span>2026</span></li></ul>
+      <h4 data-i18n="toolsl">Herramientas</h4>
+      <p>SAP Business ByDesign · Excel · Python · Claude · ChatGPT · Power BI · HTML/JS · SEPA</p>
+      <h4 data-i18n="langsl">Idiomas</h4>
+      <p data-i18n="langs">Español y catalán nativos · Inglés intermedio, buena comprensión</p>
     </div>
   </div>
-</section>
+</div></section>
+
+<section class="dl" id="cv"><div class="wrap">
+  <div><p class="k" data-i18n="dlk">CV</p><h2 data-i18n="dlh">¿Lo prefieres en una página?</h2><p data-i18n="dlp">Descárgalo en el idioma que necesites.</p></div>
+  <div class="files">
+    <a class="file" href="CV-Alejandro-Linares-ES.pdf" download><b>Castellano</b><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v9M4 7l4 4 4-4M2.5 14h11"/></svg><span data-i18n="pdf">PDF · 1 página</span></span></a>
+    <a class="file" href="CV-Alejandro-Linares-CA.pdf" download><b>Català</b><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v9M4 7l4 4 4-4M2.5 14h11"/></svg><span data-i18n="pdf">PDF · 1 página</span></span></a>
+    <a class="file" href="CV-Alejandro-Linares-EN.pdf" download><b>English</b><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 2v9M4 7l4 4 4-4M2.5 14h11"/></svg><span data-i18n="pdf">PDF · 1 página</span></span></a>
+  </div>
+</div></section>
+
+<section class="sec contact" id="contacto"><div class="wrap">
+  <div><p class="k" data-i18n="ck">Contacto</p><h2 data-i18n="ch">¿Hablamos?</h2><p class="lead2" data-i18n="cp">Si buscas a alguien que entienda las finanzas por dentro y sepa automatizarlas con cabeza, escríbeme.</p></div>
+  <div class="cbox">
+    <div><span class="lbl">Email</span><span><a id="mail" href="#contacto">…</a><button type="button" class="copy" id="copy" data-i18n="copy">Copiar</button></span></div>
+    <div><span class="lbl">LinkedIn</span><a href="https://www.linkedin.com/in/alejandro-linares-garcia" target="_blank" rel="noopener">linkedin.com/in/alejandro-linares-garcia</a></div>
+    <div><span class="lbl" data-i18n="city">Ciudad</span><span>Barcelona</span></div>
+  </div>
+</div></section>
 </main>
 
-<footer><span>Alejandro Linares García</span><span data-i18n="eyebrow">Operaciones financieras · Real estate · Barcelona</span></footer>
-</div>
+<footer><div class="wrap"><span>Alejandro Linares García</span><span data-i18n="foot">Finanzas operativas · Automatización con IA</span></div></footer>
+
 <script>
 (function(){
-  var u="alejalingar", d="gmail.com", m=u+"@"+d;
+  var m="alejalingar"+"@"+"gmail.com";
   var a=document.getElementById("mail"); a.textContent=m; a.href="mailto:"+m;
-
-  var T={
-  en:{
-    impS:"Impact",impH:"Fewer hours, fewer errors",
-    bk:"Owner payments, per cycle",bn:"Automated, and reviewed by me",
-    impAria:"Impact of the automations",ih1:"Process",ih2:"Time",ih3:"Quality",
-    ip1:"Owner payments",iq1:"Items carried over between cycles tracked",ip2:"SEPA batches",it2:"From hours to minutes",iq2:"No more bank rejections",ip3:"Late-payment fees",it3:"From hours to minutes",iq3:"No typos or wrong bookings",ip4:"Platform reconciliation",it4:"Half the time",iq4:"Alerts for unmatched payouts and overpayments",ip5:"Deposit refunds",it5:"Same time",iq5:"Far fewer errors and integrity checks",ip6:"Receivables close",it6:"Same time",iq6:"Every case with action, owner and date",inote:"Approximate times. In every case I review the output before signing it off.",
-    w5a:"Built the department’s risk register",w5b:"Risk map and executive summary for management",w6a:"Analysed the new housing law’s impact process by process",w6b:"Clear priorities for the team and contracts adapted, in English too",w7a:"Drove AI adoption in the team",w7b:"Built into day-to-day work, explicitly praised by management",w8a:"Designed the owner-area improvements module by module",w8b:"A plan ready to hand over to development",
-    t7:"Python: design and validation",sk9:"Functional design of automations",
-    nav1:"What I do",nav2:"Automation",nav5:"My own tools",nav3:"Background",nav4:"Contact",
-    eyebrow:"Financial operations · Real estate · Barcelona",
-    h1:"Money that comes in, <em>reconciles</em> and is forecast.",
-    lead:"I’m <strong>Alejandro Linares</strong>. I run the collection cycle, reconciliation and day-to-day treasury at a residential real estate company. And every process that repeats, I turn into a tool built with <strong>Python and AI</strong>, with clear rules and human control.",
-    cta1:"See what I automate",cta2:"Get in touch",
-    f1a:"4+ years",f1b:"in financial operations",f2a:"15+ processes",f2b:"recurring, under my management",f3b:"automation with human control",
-    alt:"Portrait of Alejandro Linares García",ledgerAria:"Example of a bank reconciliation",
-    lh:"Reconciliation · bank vs. ERP",r1:"SEPA direct debit batch",r2:"Card terminal takings",r3:"Platform payout",r4:"Deposit refund",diff:"Difference",illus:"Illustrative figures",
-    s1e:"What I do",s1h:"Three verbs that sum up my work",s1p:"I work for several group companies and coordinate daily with accounting, treasury, sales, IT and legal.",
-    c1h:"Comes in",c1a:"SEPA direct debit collection batches",c1b:"Accounts receivable: classifying open balances and an action plan with owner and date",c1c:"Late-payment fees, overdue payments and collection lists",
-    c2h:"Reconciles",c2a:"Posting customer and supplier invoices in the ERP",c2b:"Bank, card terminal and booking-platform reconciliation",c2c:"Spotting advance payments and checking signed contracts",
-    c3h:"Is forecast",c3a:"Cash forecasting and the monthly revenue model",c3b:"Owner payments and deposit refunds, ready for approval",c3c:"Pro formas, contract annexes and historical reports on demand",
-    rh1k:"Daily",rh1:"Invoice posting and bank, card terminal and platform reconciliation",rh2k:"Weekly",rh2:"Deposit refunds and signed-contract checks",rh3k:"Monthly",rh3:"Two SEPA batches, owner payments, late fees, receivables close, cash forecast and revenue model",
-    s2e:"Automation",s2h:"What I do by hand once, I automate the second time",s2p:"I’m not a programmer, and I don’t need to be: I define the business rules and edge cases, AI writes the code, and I run it, test it and validate every result against the systems. Everything runs locally, with a test mode before anything is changed.",
-    pq:"The script handles what’s deterministic, I decide the exceptions, and <em>nothing is written to the ERP without a human in the loop.</em>",pqs:"The rule behind everything I build.",
-    k0h:"One system per process, with a single source of rules",k0p:"Each process has its own AI project with its own rules document, plus shared skills for context, usage policy and communication. Rules already decided aren’t asked again, and no process depends on one person.",
-    fl1:"Automatic download",fl2:"routing by process",fl3:"rules + Python",fl4:"decisions in a window",fl5:"Excel / PDF / XML",
-    det:"Catches",weekly:"Weekly",alerts:"Alerts",browser:"Browser automation",privd:"Privacy",
-    k1h:"SEPA batches",k1p:"Generates the XML following the bank’s template and the signature PDF, with an adjustments sheet I confirm.",k1c:"Duplicate references, malformed IBANs and zero, negative or inconsistent amounts. It ended bank rejections.",
-    k2h:"Deposit refunds",k2p:"Automatic triage: it drops what can be excluded, asks me only about doubtful cases, checks against the ERP and prepares Excel files and emails.",k2c:"Miscalculated amounts, duplicated debts, undue cases and cases left out.",
-    k3h:"Platform and card terminal reconciliation",k3p:"Matches payouts with bookings and invoices, and daily card terminal takings with payments, leaving journal entries ready.",k3c:"Unmatched payouts, overpayments, unexpected commissions and amount differences.",
-    k4h:"Receivables with a decision desk",k4p:"I moved from classifying the balance to closing it: every case gets an action, owner and date from a decision window.",k4c:"Cent-level mismatches, cross-company debt and cases stuck for months.",
-    k5h:"Late-payment fees",k5p:"Monthly calculation and audit, and bulk application in the management system with a prior test run.",k5c:"Typos and wrong-booking errors when applying them one by one.",
-    k6h:"Treasury, payments and documents",k6p:"A cash forecast generated locally without sending data to AI, owner payments that track items carried over between cycles, and a pro forma and annex generator with dynamic VAT.",
-    k7h:"The infrastructure behind it",k7p:"A browser robot that downloads the systems’ reports every day, a file router that puts each file in its process and archives by date without ever deleting, and a local anonymiser that masks personal data before any AI use.",k7c:"Mixed-up versions, lost history and unnecessary exposure of personal data.",
-    s5e:"My own tools",s5h:"Two apps, a clear split of the data",s5p:"I designed and built both to organise the area. One organises the work; the other processes the data, and they never mix.",
-    a1k:"Operations planner · cloud",a1h:"My workspace",a1p:"The dashboard I use to organise every working day. I built it to replace Notion and check it several times a day.",
-    a1a:"Calendar and recurring tasks with daily, weekly, month-end, quarterly and yearly rules",a1b:"Closing checklists per process and for month-end, with alerts on today’s panel",a1c:"Knowledge base: procedures, documents, links and contacts",a1d:"Task capture in plain text, replacing personal data with a placeholder",a1e:"Data review that flags incomplete or misplaced sensitive information",a1pill:"No customer data",
-    a2k:"Local app · built in phases",a2h:"Operations hub",a2p:"Where the data lives and is processed, on the computer itself.",
-    a2a:"Automatic daily download from the systems and a single process window",a2b:"Customer updates and a list of things to act on",a2c:"A decisions tab bringing together receivables and deposits",a2d:"Decision store and claim tracking: Excel becomes output only",a2e:"Daily backup of what can’t be replaced and a saved version before every major change",a2pill:"Data stays local",
-    d1k:"Privacy",d1:"Identified by booking or invoice number, never by name or bank details.",d2k:"Single source",d2:"Rules live in one place; what’s been decided isn’t asked again.",d3k:"Safe migrations",d3:"Data is only migrated if the result matches the previous one in counts and fingerprints.",d4k:"For anyone",d4:"Same buttons and steps every time: any colleague can use it.",
-    s6e:"Achievements",s6h:"Action and result",
-    w1a:"Rewrote batch generation to follow the bank’s template",w1b:"Bank rejections disappeared",w2a:"Moved chat-based processes to local scripts with decisions in a window",w2b:"Customer data stays on the computer and the process is repeatable",w3a:"Consolidated scattered rules into one protocol per process",w3b:"Less reliance on a single person and no lost rules",w4a:"Changed the receivables close from classifying to closing",w4b:"Fewer never-ending cases and a clear split between cleaning up and chasing",
-    s3e:"Background",s3h:"From administration to financial operations",exp:"Experience",today:"today",current:"current",
-    j1:"Financial Operations Administrator",j1p:"I started as an intern in administration and accounting and joined the team when it ended. Today I handle collections, reconciliation and day-to-day treasury, and drive the automation of the area’s processes.",
-    j2:"Warehouse assistant",j3:"Marketing intern",j4:"Administrative intern",
-    skills:"Skills",sk1:"Accounting and bank reconciliation",sk2:"Receivables and treasury",sk3:"Business rules modelling",sk4:"Script testing and validation",sk5:"Process documentation",sk6:"Applied data protection",sk7:"Continuous improvement",sk8:"Change management",
-    edu:"Education",e1:"BA in Sociology",e1p:"Combined with work for much of the degree.",e2:"Higher VET in Marketing and Advertising",e3:"VET in Business Administration",
-    tools:"Tools",t1:"Accounting ERP (SAP Business ByDesign)",t2:"Advanced Excel",t3:".bat scripts",t4:"Browser automation",t5:"Online banking and SEPA",t6:"E-signature",
-    langs:"Languages",es:"Spanish",cat:"Catalan",eng:"English",native:"· native",engl:"· intermediate, good comprehension",
-    s4e:"Contact",s4h:"Shall we talk about processes that reconcile themselves?",s4p:"If you work in finance, operations or real estate and want to bring AI into the department’s day-to-day with rigour, drop me a line.",
-    copy:"Copy",copied:"Copied",city:"City"
-  },
-  ca:{
-    impS:"Impacte",impH:"Menys hores, menys errors",
-    bk:"Pagaments delegats, per cicle",bn:"Automatitzat i revisat per mi",
-    impAria:"Impacte de les automatitzacions",ih1:"Procés",ih2:"Temps",ih3:"Qualitat",
-    ip1:"Pagaments delegats a propietaris",iq1:"Control de pendents entre cicles",ip2:"Remeses SEPA",it2:"D’hores a minuts",iq2:"Sense rebutjos a la banca en línia",ip3:"Recàrrecs per demora",it3:"D’hores a minuts",iq3:"Sense errors de teclejat ni de reserva",ip4:"Conciliació de plataformes",it4:"La meitat de temps",iq4:"Alertes d’abonaments sense encreuament i sobrepagaments",ip5:"Devolució de fiances",it5:"Mateix temps",iq5:"Molts menys errors i control d’integritat",ip6:"Tancament de comptes a cobrar",it6:"Mateix temps",iq6:"Cada cas amb acció, responsable i data",inote:"Temps aproximats. En tots els casos reviso el resultat abans de donar-lo per bo.",
-    w5a:"Vaig elaborar el registre de riscos del departament",w5b:"Mapa de riscos i resum executiu per a direcció",w6a:"Vaig analitzar l’impacte de la nova llei d’habitatge procés per procés",w6b:"Prioritats clares per a l’equip i contractes adaptats, també en anglès",w7a:"Vaig impulsar l’adopció de la IA a l’equip",w7b:"Ús integrat en el dia a dia, valorat expressament per direcció",w8a:"Vaig dissenyar per mòduls les millores de l’àrea de propietaris",w8b:"Pla a punt per passar a desenvolupament",
-    t7:"Python: disseny i validació",sk9:"Disseny funcional d’automatitzacions",
-    nav1:"Què faig",nav2:"Automatització",nav5:"Eines pròpies",nav3:"Trajectòria",nav4:"Contacte",
-    eyebrow:"Operacions financeres · Real estate · Barcelona",
-    h1:"Que els diners entrin, <em>quadrin</em> i estiguin previstos.",
-    lead:"Soc l’<strong>Alejandro Linares</strong>. Porto el cicle de cobrament, la conciliació i la tresoreria operativa d’una empresa de real estate residencial. I cada procés que es repeteix el converteixo en una eina amb <strong>Python i IA</strong>, amb regles clares i control humà.",
-    cta1:"Veure què automatitzo",cta2:"Contactar",
-    f1a:"+4 anys",f1b:"en operacions financeres",f2a:"+15 processos",f2b:"recurrents sota la meva gestió",f3b:"automatització amb control humà",
-    alt:"Retrat de l’Alejandro Linares García",ledgerAria:"Exemple de conciliació bancària",
-    lh:"Conciliació · banc vs. ERP",r1:"Remesa SEPA",r2:"Cobraments TPV del dia",r3:"Liquidació plataforma",r4:"Devolució de fiança",diff:"Diferència",illus:"Xifres il·lustratives",
-    s1e:"Què faig",s1h:"Tres verbs que resumeixen la meva feina",s1p:"Treballo per a diverses societats del grup i em coordino cada dia amb comptabilitat, tresoreria, comercial, IT i jurídic.",
-    c1h:"Entren",c1a:"Remeses de cobrament per domiciliació SEPA",c1b:"Comptes a cobrar: classificació del saldo obert i pla d’acció amb responsable i data",c1c:"Recàrrecs per demora, impagaments i llistats de reclamació",
-    c2h:"Quadren",c2a:"Comptabilització de factures de clients i proveïdors a l’ERP",c2b:"Conciliació bancària, de TPV i de plataformes de reserva",c2c:"Detecció d’avançaments i control de signatura de contractes",
-    c3h:"Estan previstos",c3a:"Previsió de tresoreria i model mensual d’ingressos",c3b:"Pagaments delegats a propietaris i devolucions de fiances, a punt per a l’autorització",c3c:"Proformes, annexos i informes històrics a demanda",
-    rh1k:"Cada dia",rh1:"Comptabilització de factures i conciliació de banc, TPV i plataformes",rh2k:"Cada setmana",rh2:"Devolució de fiances i control de contractes signats",rh3k:"Cada mes",rh3:"Dues remeses SEPA, pagaments delegats, recàrrecs, tancament de comptes a cobrar, previsió de tresoreria i model d’ingressos",
-    s2e:"Automatització",s2h:"El que faig a mà una vegada, la segona ho automatitzo",s2p:"No soc programador, i no em cal: jo defineixo les regles i les casuístiques del negoci, la IA escriu el codi i jo l’executo, el provo i valido cada resultat contra els sistemes. Tot funciona en local i amb mode de prova abans de tocar res.",
-    pq:"L’script fa el que és determinista, jo decideixo les excepcions i <em>res no s’escriu a l’ERP sense intervenció humana.</em>",pqs:"El criteri comú de tot el que construeixo.",
-    k0h:"Un sistema per procés, amb una sola font de regles",k0p:"Cada procés té el seu projecte d’IA amb un document de regles propi, i skills compartides de context, política d’ús i comunicació. Les regles ja decidides no es tornen a preguntar i el procés no depèn d’una sola persona.",
-    fl1:"Descàrrega automàtica",fl2:"repartiment per procés",fl3:"regles + Python",fl4:"decisions en finestra",fl5:"Excel / PDF / XML",
-    det:"Detecta",weekly:"Setmanal",alerts:"Alertes",browser:"Automatització de navegador",privd:"Privacitat",
-    k1h:"Remeses SEPA",k1p:"Genera l’XML respectant la plantilla bancària i el PDF de signatures, amb un full d’ajustos que confirmo jo.",k1c:"Referències duplicades, IBAN mal formats i imports a zero, negatius o incoherents. Va acabar amb els rebutjos a la banca en línia.",
-    k2h:"Devolució de fiances",k2p:"Triatge automàtic: descarta el que és excloïble, només em pregunta el dubtós, encreua amb l’ERP i prepara Excel i correus.",k2c:"Imports mal calculats, deutes duplicats, casos indeguts i casos que queden fora.",
-    k3h:"Conciliació de plataformes i TPV",k3p:"Encreua abonaments amb reserves i factures, i casa els ingressos diaris del TPV amb els cobraments, deixant els assentaments preparats.",k3c:"Abonaments sense encreuament, sobrepagaments, comissions diferents de les esperades i diferències d’import.",
-    k4h:"Comptes a cobrar amb taula de decisions",k4p:"Vaig passar de classificar el saldo a tancar-lo: cada cas surt amb acció, responsable i data des d’una finestra de decisions.",k4c:"Descuadraments de cèntims, deute creuat entre societats i casos encallats durant mesos.",
-    k5h:"Recàrrecs per demora",k5p:"Càlcul i auditoria mensual, i aplicació massiva al sistema de gestió amb mode de prova previ.",k5c:"Errors de teclejat i de selecció de reserva en aplicar-los un per un.",
-    k6h:"Tresoreria, pagaments i documents",k6p:"Previsió de tresoreria generada en local sense pujar dades a la IA, pagaments delegats amb control de pendents entre cicles i generador de proformes i annexos amb IVA dinàmic.",
-    k7h:"La infraestructura que ho sosté",k7p:"Un robot de navegador que descarrega cada dia els informes dels sistemes, un repartidor que col·loca cada fitxer al seu procés i arxiva per data sense esborrar mai, i un anonimitzador local que emmascara les dades personals abans de qualsevol ús d’IA.",k7c:"Versions barrejades, històric perdut i exposició innecessària de dades personals.",
-    s5e:"Eines pròpies",s5h:"Dues aplicacions, un repartiment clar de les dades",s5p:"Vaig dissenyar i construir totes dues per organitzar l’àrea. Una organitza la feina; l’altra processa les dades, i mai no es barregen.",
-    a1k:"Agenda d’operacions · al núvol",a1h:"El meu espai",a1p:"El tauler des del qual organitzo cada dia de feina. El vaig crear per substituir Notion i el consulto diverses vegades al dia.",
-    a1a:"Calendari i tasques recurrents amb regles diàries, setmanals, de final de mes, trimestrals i anuals",a1b:"Checklist de tancament per procés i de tancament de mes, amb avisos al tauler d’avui",a1c:"Base de coneixement: processos, documents, enllaços i contactes",a1d:"Alta de tasques escrivint en text lliure, substituint les dades personals per un marcador",a1e:"Revisió de dades que avisa d’informació incompleta o sensible fora de lloc",a1pill:"Sense dades de clients",
-    a2k:"Aplicació local · en construcció per fases",a2h:"Centre d’operacions",a2p:"On viuen i es processen les dades, al mateix equip.",
-    a2a:"Descàrrega diària automàtica dels sistemes i finestra única de processos",a2b:"Novetats de clients i llista de coses on actuar",a2c:"Pestanya de decisions que reuneix comptes a cobrar i fiances",a2d:"Magatzem de decisions i seguiment de reclamacions: l’Excel passa a ser només sortida",a2e:"Còpia diària del que és irreemplaçable i versió desada abans de cada canvi gran",a2pill:"Dades només en local",
-    d1k:"Privacitat",d1:"Identificació per nº de reserva o factura, mai per nom ni dades bancàries.",d2k:"Una sola font",d2:"Les regles viuen en un únic lloc; el que ja s’ha decidit no es torna a preguntar.",d3k:"Migracions segures",d3:"Només es migra si el resultat coincideix amb l’anterior en recomptes i empremtes.",d4k:"Per a tothom",d4:"Mateixos botons i passos sempre: el pot fer servir qualsevol company.",
-    s6e:"Assoliments",s6h:"Acció i resultat",
-    w1a:"Vaig reescriure la generació de remeses per respectar la plantilla bancària",w1b:"Van desaparèixer els rebutjos a la banca en línia",w2a:"Vaig passar processos fets per xat a scripts locals amb decisions en finestra",w2b:"Les dades de clients no surten de l’equip i el procés és repetible",w3a:"Vaig consolidar regles disperses en un protocol únic per procés",w3b:"Menys dependència d’una sola persona i cap regla perduda",w4a:"Vaig canviar el tancament de comptes a cobrar de classificar a tancar",w4b:"Menys casos eterns i repartiment clar entre qui neteja i qui reclama",
-    s3e:"Trajectòria",s3h:"De la gestió administrativa a les finances operatives",exp:"Experiència",today:"avui",current:"actual",
-    j1:"Administratiu d’Operacions Financeres",j1p:"Vaig començar en pràctiques d’administració i comptabilitat i em vaig incorporar a la plantilla en acabar-les. Avui porto cobraments, conciliació i tresoreria operativa, i impulso l’automatització dels processos de l’àrea.",
-    j2:"Mosso de magatzem",j3:"Tècnic de màrqueting en pràctiques",j4:"Auxiliar administratiu en pràctiques",
-    skills:"Competències",sk1:"Conciliació comptable i bancària",sk2:"Comptes a cobrar i tresoreria",sk3:"Modelatge de regles de negoci",sk4:"Proves i validació d’scripts",sk5:"Documentació de processos",sk6:"Protecció de dades aplicada",sk7:"Millora contínua",sk8:"Gestió del canvi",
-    edu:"Formació",e1:"Grau en Sociologia",e1p:"Compaginat amb feina durant bona part de la carrera.",e2:"CFGS Màrqueting i Publicitat",e3:"CFGM Gestió Administrativa",
-    tools:"Eines",t1:"ERP comptable (SAP Business ByDesign)",t2:"Excel avançat",t3:"Scripts .bat",t4:"Automatització de navegador",t5:"Banca en línia i SEPA",t6:"Signatura electrònica",
-    langs:"Idiomes",es:"Castellà",cat:"Català",eng:"Anglès",native:"· natiu",engl:"· intermedi, bona comprensió",
-    s4e:"Contacte",s4h:"Parlem de processos que quadren sols?",s4p:"Si treballes en finances, operacions o real estate i t’interessa aplicar la IA al dia a dia del departament amb rigor, escriu-me.",
-    copy:"Copiar",copied:"Copiat",city:"Ciutat"
-  }};
-
-  var ES={};
-  document.querySelectorAll("[data-i18n]").forEach(function(el){ES[el.getAttribute("data-i18n")]=el.innerHTML;});
-  ES.copied="Copiado";
-  var img=document.querySelector("[data-i18n-alt]");
-  ES.alt=img.alt;
-  T.es=ES;
-  var current="es";
-
-  function setLang(l){
-    if(!T[l]) l="es"; current=l;
-    var t=T[l];
+  var T={"es": {"nav1": "Casos", "nav2": "Cómo trabajo", "nav3": "Trayectoria", "nav4": "CV", "kicker": "Finanzas operativas · Automatización con IA · Barcelona", "h1": "Que el dinero entre, <em>cuadre</em> y esté previsto.", "lead": "Llevo los cobros, la conciliación y la tesorería operativa de un grupo inmobiliario. Mi especialidad: convertir el trabajo repetitivo en procesos que se hacen solos, sin perder el control.", "cta1": "Descargar CV", "cta2": "Ver casos reales", "s1": "Pagos a propietarios, por ciclo", "s2v": "0 rechazos", "s2": "En remesas SEPA desde el rediseño", "s3": "Procesos recurrentes bajo mi gestión", "howk": "Cómo trabajo", "howh": "No programo. Diseño, pruebo y decido.", "howp": "La IA es mi herramienta, no mi sustituta. El criterio financiero lo pongo yo.", "st1h": "Entiendo el proceso", "st1": "Desmonto cada tarea en reglas, excepciones y casos raros. Es la parte que más tiempo lleva y la que más importa.", "st2h": "La IA escribe el código", "st2": "Con esas reglas, la IA genera scripts en Python que leen los informes del ERP y preparan el trabajo.", "st3h": "Yo valido y decido", "st3": "Pruebo en modo seguro, contrasto con el sistema y apruebo. Nada entra en el ERP sin mi revisión.", "pq": "El script hace lo determinista, yo decido las excepciones y nada se escribe en el ERP sin intervención humana.", "casek": "Casos", "caseh": "Tres problemas reales, tres resultados", "casep": "Situaciones del día a día y cómo las resolví.", "lp": "Problema", "ls": "Solución", "c1k": "Pagos a propietarios", "c1h": "Cinco horas convertidas en media", "c1p": "Cada ciclo había que cruzar a mano lo cobrado y lo pendiente de cada propietario, factura a factura.", "c1s": "Un script cruza proveedor contra cliente, aparca lo que no se puede pagar y deja el soporte listo para firmar.", "c1r": "~5 h → ~30 min", "c1l": "por ciclo, revisión incluida", "c2k": "Remesas SEPA", "c2h": "De rechazos del banco a cero incidencias", "c2p": "Montar las remesas llevaba horas y el banco devolvía ficheros por errores de formato.", "c2s": "Rediseñé la generación del fichero respetando la plantilla bancaria, con controles de IBAN, duplicados e importes.", "c2r": "0 rechazos", "c2l": "y de horas a minutos", "c3k": "Devolución de fianzas", "c3h": "Menos errores en cada lote semanal", "c3p": "Contabilidad encontraba errores casi cada semana: importes mal calculados, deudas duplicadas, casos olvidados.", "c3s": "Triaje automático que solo me pregunta lo dudoso, cruce con el ERP y comprobación de integridad antes de entregar.", "c3r": "Muchos menos errores", "c3l": "con control en cada ciclo", "moreh": "También automatizado", "m1": "Conciliación de plataformas de reserva, en la mitad de tiempo", "m2": "Conciliación de TPV con los asientos preparados", "m3": "Recargos por demora aplicados en minutos", "m4": "Cuentas a cobrar con un plan de acción por caso", "m5": "Proformas y anexos con el IVA calculado", "m6": "Descarga diaria de informes y archivo automático", "m7": "Anonimizador local para proteger datos personales", "m8": "Previsión de tesorería generada en local", "toolk": "Herramientas propias", "toolh": "Dos aplicaciones que diseñé", "toolp": "Una organiza mi trabajo. La otra procesa los datos. Nunca se mezclan.", "t1h": "Mi espacio", "t1": "Mi agenda de operaciones: tareas recurrentes, checklists de cierre y base de conocimiento. Sustituyó a Notion y la uso varias veces al día.", "t1tag": "Sin datos de clientes", "t2h": "Centro de operaciones", "t2": "Aplicación local que descarga los datos cada día, avisa de novedades y reúne las decisiones pendientes en una sola pantalla.", "t2tag": "Datos solo en local", "dayk": "Qué hago", "dayh": "Mi día a día", "v1": "Entra", "v1a": "Remesas de cobro SEPA", "v1b": "Cuentas a cobrar B2B y B2C", "v1c": "Recargos e impagos", "v2": "Cuadra", "v2a": "Conciliación bancaria y de TPV", "v2b": "Plataformas de reserva", "v2c": "Contabilización en SAP ByDesign", "v3": "Está previsto", "v3a": "Previsión de tesorería", "v3b": "Pagos a propietarios", "v3c": "Devolución de fianzas", "cvk": "Trayectoria", "cvh": "De la administración a las finanzas operativas", "now": "hoy", "j1": "Administrativo de Operaciones Financieras", "j1p": "Entré en prácticas y me quedé. Hoy llevo cobros, conciliación y tesorería operativa, e impulso la automatización del área.", "j2": "Técnico de marketing (prácticas)", "j3": "Auxiliar administrativo (prácticas)", "edu": "Formación", "e1": "Grado en Sociología", "e2": "CFGS Marketing y Publicidad", "e3": "CFGM Gestión Administrativa", "e4": "IA aplicada a la empresa (en curso)", "toolsl": "Herramientas", "langsl": "Idiomas", "langs": "Español y catalán nativos · Inglés intermedio, buena comprensión", "dlk": "CV", "dlh": "¿Lo prefieres en una página?", "dlp": "Descárgalo en el idioma que necesites.", "pdf": "PDF · 1 página", "ck": "Contacto", "ch": "¿Hablamos?", "cp": "Si buscas a alguien que entienda las finanzas por dentro y sepa automatizarlas con cabeza, escríbeme.", "copy": "Copiar", "copied": "Copiado", "city": "Ciudad", "alt": "Retrato de Alejandro Linares García", "foot": "Finanzas operativas · Automatización con IA"}, "ca": {"nav1": "Casos", "nav2": "Com treballo", "nav3": "Trajectòria", "nav4": "CV", "kicker": "Finances operatives · Automatització amb IA · Barcelona", "h1": "Que els diners entrin, <em>quadrin</em> i estiguin previstos.", "lead": "Porto els cobraments, la conciliació i la tresoreria operativa d’un grup immobiliari. La meva especialitat: convertir la feina repetitiva en processos que es fan sols, sense perdre el control.", "cta1": "Descarregar CV", "cta2": "Veure casos reals", "s1": "Pagaments a propietaris, per cicle", "s2v": "0 rebutjos", "s2": "En remeses SEPA des del redisseny", "s3": "Processos recurrents sota la meva gestió", "howk": "Com treballo", "howh": "No programo. Dissenyo, provo i decideixo.", "howp": "La IA és la meva eina, no la meva substituta. El criteri financer el poso jo.", "st1h": "Entenc el procés", "st1": "Desmunto cada tasca en regles, excepcions i casos estranys. És la part que porta més temps i la que més importa.", "st2h": "La IA escriu el codi", "st2": "Amb aquestes regles, la IA genera scripts en Python que llegeixen els informes de l’ERP i preparen la feina.", "st3h": "Jo valido i decideixo", "st3": "Provo en mode segur, contrasto amb el sistema i aprovo. Res no entra a l’ERP sense la meva revisió.", "pq": "L’script fa el que és determinista, jo decideixo les excepcions i res no s’escriu a l’ERP sense intervenció humana.", "casek": "Casos", "caseh": "Tres problemes reals, tres resultats", "casep": "Situacions del dia a dia i com les vaig resoldre.", "lp": "Problema", "ls": "Solució", "c1k": "Pagaments a propietaris", "c1h": "Cinc hores convertides en mitja", "c1p": "Cada cicle calia creuar a mà el que s’havia cobrat i el que quedava pendent de cada propietari, factura a factura.", "c1s": "Un script creua proveïdor contra client, aparca el que no es pot pagar i deixa el suport a punt per signar.", "c1r": "~5 h → ~30 min", "c1l": "per cicle, revisió inclosa", "c2k": "Remeses SEPA", "c2h": "De rebutjos del banc a zero incidències", "c2p": "Muntar les remeses portava hores i el banc retornava fitxers per errors de format.", "c2s": "Vaig redissenyar la generació del fitxer respectant la plantilla bancària, amb controls d’IBAN, duplicats i imports.", "c2r": "0 rebutjos", "c2l": "i d’hores a minuts", "c3k": "Devolució de fiances", "c3h": "Menys errors a cada lot setmanal", "c3p": "Comptabilitat trobava errors gairebé cada setmana: imports mal calculats, deutes duplicats, casos oblidats.", "c3s": "Triatge automàtic que només em pregunta el dubtós, encreuament amb l’ERP i comprovació d’integritat abans d’entregar.", "c3r": "Molts menys errors", "c3l": "amb control a cada cicle", "moreh": "També automatitzat", "m1": "Conciliació de plataformes de reserva, en la meitat de temps", "m2": "Conciliació de TPV amb els assentaments preparats", "m3": "Recàrrecs per demora aplicats en minuts", "m4": "Comptes a cobrar amb un pla d’acció per cas", "m5": "Proformes i annexos amb l’IVA calculat", "m6": "Descàrrega diària d’informes i arxiu automàtic", "m7": "Anonimitzador local per protegir dades personals", "m8": "Previsió de tresoreria generada en local", "toolk": "Eines pròpies", "toolh": "Dues aplicacions que vaig dissenyar", "toolp": "Una organitza la meva feina. L’altra processa les dades. Mai no es barregen.", "t1h": "El meu espai", "t1": "La meva agenda d’operacions: tasques recurrents, checklists de tancament i base de coneixement. Va substituir Notion i la faig servir diverses vegades al dia.", "t1tag": "Sense dades de clients", "t2h": "Centre d’operacions", "t2": "Aplicació local que descarrega les dades cada dia, avisa de novetats i reuneix les decisions pendents en una sola pantalla.", "t2tag": "Dades només en local", "dayk": "Què faig", "dayh": "El meu dia a dia", "v1": "Entren", "v1a": "Remeses de cobrament SEPA", "v1b": "Comptes a cobrar B2B i B2C", "v1c": "Recàrrecs i impagaments", "v2": "Quadren", "v2a": "Conciliació bancària i de TPV", "v2b": "Plataformes de reserva", "v2c": "Comptabilització a SAP ByDesign", "v3": "Estan previstos", "v3a": "Previsió de tresoreria", "v3b": "Pagaments a propietaris", "v3c": "Devolució de fiances", "cvk": "Trajectòria", "cvh": "De l’administració a les finances operatives", "now": "avui", "j1": "Administratiu d’Operacions Financeres", "j1p": "Vaig entrar en pràctiques i m’hi vaig quedar. Avui porto cobraments, conciliació i tresoreria operativa, i impulso l’automatització de l’àrea.", "j2": "Tècnic de màrqueting (pràctiques)", "j3": "Auxiliar administratiu (pràctiques)", "edu": "Formació", "e1": "Grau en Sociologia", "e2": "CFGS Màrqueting i Publicitat", "e3": "CFGM Gestió Administrativa", "e4": "IA aplicada a l’empresa (en curs)", "toolsl": "Eines", "langsl": "Idiomes", "langs": "Castellà i català natius · Anglès intermedi, bona comprensió", "dlk": "CV", "dlh": "El prefereixes en una pàgina?", "dlp": "Descarrega’l en l’idioma que necessitis.", "pdf": "PDF · 1 pàgina", "ck": "Contacte", "ch": "En parlem?", "cp": "Si busques algú que entengui les finances per dins i sàpiga automatitzar-les amb cap, escriu-me.", "copy": "Copiar", "copied": "Copiat", "city": "Ciutat", "alt": "Retrat de l’Alejandro Linares García", "foot": "Finances operatives · Automatització amb IA"}, "en": {"nav1": "Case studies", "nav2": "How I work", "nav3": "Background", "nav4": "CV", "kicker": "Financial operations · AI-driven automation · Barcelona", "h1": "Money that comes in, <em>reconciles</em> and is forecast.", "lead": "I run collections, reconciliation and day-to-day treasury for a real estate group. My speciality: turning repetitive work into processes that run themselves, without losing control.", "cta1": "Download CV", "cta2": "See real cases", "s1": "Payments to property owners, per cycle", "s2v": "0 rejections", "s2": "On SEPA batches since the redesign", "s3": "Recurring processes under my management", "howk": "How I work", "howh": "I don’t code. I design, test and decide.", "howp": "AI is my tool, not my replacement. The financial judgement is mine.", "st1h": "I understand the process", "st1": "I break every task down into rules, exceptions and edge cases. It takes the most time, and it matters most.", "st2h": "AI writes the code", "st2": "With those rules, AI generates Python scripts that read the ERP reports and prepare the work.", "st3h": "I validate and decide", "st3": "I test in a safe mode, check against the system and approve. Nothing goes into the ERP without my review.", "pq": "The script handles what’s deterministic, I decide the exceptions, and nothing is written to the ERP without a human in the loop.", "casek": "Case studies", "caseh": "Three real problems, three results", "casep": "Everyday situations and how I solved them.", "lp": "Problem", "ls": "Solution", "c1k": "Owner payments", "c1h": "Five hours turned into thirty minutes", "c1p": "Every cycle meant matching, by hand, what had been collected and what was still pending for each owner, invoice by invoice.", "c1s": "A script matches supplier against customer, parks what can’t be paid yet and leaves the paperwork ready to sign.", "c1r": "~5 h → ~30 min", "c1l": "per cycle, review included", "c2k": "SEPA batches", "c2h": "From bank rejections to zero incidents", "c2p": "Building the batches took hours, and the bank kept bouncing files over format errors.", "c2s": "I redesigned how the file is generated to follow the bank’s template, with checks on IBANs, duplicates and amounts.", "c2r": "0 rejections", "c2l": "and from hours to minutes", "c3k": "Deposit refunds", "c3h": "Fewer errors in every weekly batch", "c3p": "Accounting found errors almost every week: miscalculated amounts, duplicated debts, forgotten cases.", "c3s": "Automatic triage that only asks me about doubtful cases, a check against the ERP and an integrity test before delivery.", "c3r": "Far fewer errors", "c3l": "with checks every cycle", "moreh": "Also automated", "m1": "Booking-platform reconciliation, in half the time", "m2": "Card-terminal reconciliation with journal entries ready", "m3": "Late-payment fees applied in minutes", "m4": "Receivables with an action plan for every case", "m5": "Pro formas and annexes with VAT calculated", "m6": "Daily report downloads and automatic filing", "m7": "Local anonymiser to protect personal data", "m8": "Cash forecast generated locally", "toolk": "My own tools", "toolh": "Two apps I designed", "toolp": "One organises my work. The other processes the data. They never mix.", "t1h": "My workspace", "t1": "My operations planner: recurring tasks, closing checklists and a knowledge base. It replaced Notion and I use it several times a day.", "t1tag": "No customer data", "t2h": "Operations hub", "t2": "A local app that downloads the data every day, flags what’s new and gathers pending decisions on a single screen.", "t2tag": "Data stays local", "dayk": "What I do", "dayh": "My day to day", "v1": "Comes in", "v1a": "SEPA direct debit batches", "v1b": "B2B and B2C receivables", "v1c": "Late fees and overdue accounts", "v2": "Reconciles", "v2a": "Bank and card-terminal reconciliation", "v2b": "Booking platforms", "v2c": "Posting in SAP ByDesign", "v3": "Is forecast", "v3a": "Cash forecasting", "v3b": "Payments to property owners", "v3c": "Deposit refunds", "cvk": "Background", "cvh": "From administration to financial operations", "now": "today", "j1": "Financial Operations Administrator", "j1p": "I joined as an intern and stayed. Today I handle collections, reconciliation and day-to-day treasury, and drive the automation of the area.", "j2": "Marketing intern", "j3": "Administrative intern", "edu": "Education", "e1": "BA in Sociology", "e2": "Higher VET in Marketing and Advertising", "e3": "VET in Business Administration", "e4": "Applied AI for business (in progress)", "toolsl": "Tools", "langsl": "Languages", "langs": "Native Spanish and Catalan · Intermediate English, good comprehension", "dlk": "CV", "dlh": "Prefer it on one page?", "dlp": "Download it in the language you need.", "pdf": "PDF · 1 page", "ck": "Contact", "ch": "Shall we talk?", "cp": "If you’re looking for someone who understands finance from the inside and knows how to automate it sensibly, drop me a line.", "copy": "Copy", "copied": "Copied", "city": "City", "alt": "Portrait of Alejandro Linares García", "foot": "Financial operations · AI-driven automation"}};
+  var cur="es";
+  function set(l){
+    if(!T[l]) l="es"; cur=l; var t=T[l];
     document.querySelectorAll("[data-i18n]").forEach(function(el){var k=el.getAttribute("data-i18n"); if(t[k]!=null) el.innerHTML=t[k];});
-    img.alt=t.alt;
+    document.querySelectorAll("[data-alt]").forEach(function(el){el.alt=t[el.getAttribute("data-alt")];});
     document.documentElement.lang=l;
     document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===l?"true":"false");});
     try{localStorage.setItem("al-lang",l);}catch(e){}
   }
-  document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){setLang(b.dataset.lang);});});
-
-  var start="";
-  try{start=localStorage.getItem("al-lang")||"";}catch(e){start="";}
-  if(!start){var n=(navigator.language||"es").slice(0,2); start=(n==="ca"||n==="en")?n:"es";}
-  setLang(start);
-
-  document.getElementById("copy").addEventListener("click",function(){
-    var b=this;
-    try{
-      navigator.clipboard.writeText(m).then(function(){b.textContent=T[current].copied;setTimeout(function(){b.textContent=T[current].copy;},1600);},function(){});
-    }catch(e){}
-  });
+  document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){set(b.dataset.lang);});});
+  var s=""; try{s=localStorage.getItem("al-lang")||"";}catch(e){}
+  if(!s){var n=(navigator.language||"es").slice(0,2); s=(n==="ca"||n==="en")?n:"es";}
+  set(s);
+  document.getElementById("copy").addEventListener("click",function(){var b=this;try{navigator.clipboard.writeText(m).then(function(){b.textContent=T[cur].copied;setTimeout(function(){b.textContent=T[cur].copy;},1600);},function(){});}catch(e){}});
 })();
 </script>
 </body>
